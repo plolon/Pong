@@ -42,7 +42,13 @@ namespace pong
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            // TODO: Add your update logic here
+
+
+            KeyboardHandler.GetState();
+            if (KeyboardHandler.IsPressed(Keys.Up))
+            {
+                
+            }
 
             base.Update(gameTime);
         }

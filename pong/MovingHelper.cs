@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Microsoft.Xna.Framework.Input;
 
 namespace pong
 {
@@ -11,7 +9,22 @@ namespace pong
 
         public static void Move()
         {
-
+            if (KeyboardHandler.IsPressed(Keys.Up))
+            {
+                player2 = Direction.Up;
+            }
+            if (KeyboardHandler.IsPressed(Keys.Down))
+            {
+                player2 = Direction.Down;
+            }
+            if (KeyboardHandler.IsPressed(Keys.W))
+            {
+                player1 = Direction.Up;
+            }
+            if (KeyboardHandler.IsPressed(Keys.S))
+            {
+                player1 = Direction.Down;
+            }
         }
     }
 }
@@ -19,6 +32,5 @@ public enum Direction
 {
     Up,
     Down,
-    Right,
-    Left,
+    Immobile,
 }

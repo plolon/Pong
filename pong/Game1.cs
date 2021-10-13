@@ -16,6 +16,8 @@ namespace pong
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
+            _graphics.PreferredBackBufferWidth = CONFIG.WIDTH;
+            _graphics.PreferredBackBufferHeight = CONFIG.HEIGHT;
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
         }
@@ -42,7 +44,11 @@ namespace pong
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            // TODO: Add your update logic here
+            KeyboardHandler.GetState();
+            MovingHelper.Move();
+
+            players[0].Move(MovingHelper.player1);
+            players[1].Move(MovingHelper.player2);
 
             base.Update(gameTime);
         }
@@ -65,8 +71,8 @@ namespace pong
         {
             return new List<Platform>()
             {
-                new Platform(new Vector2(5, (_graphics.PreferredBackBufferHeight/2) - 50), "Player 1"),
-                new Platform(new Vector2(_graphics.PreferredBackBufferWidth-25, (_graphics.PreferredBackBufferHeight/2) - 50), "Player 2"),
+                new Platform(new Vector2(5, (CONFIG.HEIGHT/2) - CONFIG.PLATFORM_SIZE/2), "Player 1"),
+                new Platform(new Vector2(CONFIG.WIDTH-25, (CONFIG.HEIGHT/2) - CONFIG.PLATFORM_SIZE/2), "Player 2"),
             };
         }
     }

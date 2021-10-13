@@ -10,7 +10,9 @@ namespace pong
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         private List<Platform> players;
-        Texture2D playerT;
+        private Ball ball;
+        private Texture2D WhiteTex;
+        private Texture2D ballT;
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -22,14 +24,16 @@ namespace pong
         {
             // TODO: Add your initialization logic here
             players = CreatePaddles();
+            ballT = Content.Load<Texture2D>("ball");
+            ball = new Ball(new Vector2(_graphics.PreferredBackBufferWidth / 2, _graphics.PreferredBackBufferHeight / 2));
             base.Initialize();
         }
 
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            playerT = new Texture2D(GraphicsDevice, 1, 1);
-            playerT.SetData(new Color[] { Color.White });
+            WhiteTex = new Texture2D(GraphicsDevice, 1, 1);
+            WhiteTex.SetData(new Color[] { Color.White });
             // TODO: use this.Content to load your game content here
         }
 
@@ -50,8 +54,9 @@ namespace pong
             // TODO: Add your drawing code here
             foreach (var player in players)
             {
-                _spriteBatch.Draw(playerT, new Rectangle((int)player.Pos.X, (int)player.Pos.Y, 20, 100), Color.White);
+                _spriteBatch.Draw(WhiteTex, new Rectangle((int)player.Pos.X, (int)player.Pos.Y, 20, 100), Color.White);
             }
+            _spriteBatch.Draw(ballT, new Rectangle((int)ball.Pos.X - 15, (int)ball.Pos.Y - 15, 30, 30), Color.White);
             _spriteBatch.End();
             base.Draw(gameTime);
         }

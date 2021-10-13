@@ -47,6 +47,9 @@ namespace pong
             KeyboardHandler.GetState();
             MovingHelper.Move();
 
+            players[0].Move(MovingHelper.player1);
+            players[1].Move(MovingHelper.player2);
+
             base.Update(gameTime);
         }
 

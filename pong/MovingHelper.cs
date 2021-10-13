@@ -4,8 +4,8 @@ namespace pong
 {
     public static class MovingHelper
     {
-        static Direction player1;
-        static Direction player2;
+        public static Direction player1 { get; private set; }
+        public static Direction player2 { get; private set; }
 
         public static void Move()
         {

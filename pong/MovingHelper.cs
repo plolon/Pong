@@ -13,17 +13,26 @@ namespace pong
             {
                 player2 = Direction.Up;
             }
-            if (KeyboardHandler.IsPressed(Keys.Down))
+            else if (KeyboardHandler.IsPressed(Keys.Down))
             {
                 player2 = Direction.Down;
             }
+            else
+            {
+                player2 = Direction.Immobile;
+            }
+
             if (KeyboardHandler.IsPressed(Keys.W))
             {
                 player1 = Direction.Up;
             }
-            if (KeyboardHandler.IsPressed(Keys.S))
+            else if (KeyboardHandler.IsPressed(Keys.S))
             {
                 player1 = Direction.Down;
+            }
+            else
+            {
+                player1 = Direction.Immobile;
             }
         }
     }

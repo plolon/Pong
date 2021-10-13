@@ -24,6 +24,7 @@ namespace pong
                 case Direction.Immobile:
                     break;
             }
+            CheckBorders();
         }
 
         private void CheckBorders()

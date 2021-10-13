@@ -57,6 +57,7 @@ namespace pong
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
             _spriteBatch.Begin();
+            DrawLine();
             // TODO: Add your drawing code here
             foreach (var player in players)
             {
@@ -74,6 +75,10 @@ namespace pong
                 new Platform(new Vector2(5, (CONFIG.HEIGHT/2) - CONFIG.PLATFORM_SIZE/2), "Player 1"),
                 new Platform(new Vector2(CONFIG.WIDTH-25, (CONFIG.HEIGHT/2) - CONFIG.PLATFORM_SIZE/2), "Player 2"),
             };
+        }
+        private void DrawLine()
+        {
+            _spriteBatch.Draw(WhiteTex, new Rectangle(CONFIG.WIDTH / 2 - 4, 0, 8, CONFIG.HEIGHT), Color.White);
         }
     }
 }

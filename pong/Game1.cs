@@ -55,7 +55,7 @@ namespace pong
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Black);
             _spriteBatch.Begin();
             DrawLine();
             // TODO: Add your drawing code here

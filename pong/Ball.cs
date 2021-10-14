@@ -27,12 +27,12 @@ namespace pong
             {
                 switchMove();
                 CheckWallCollision();
+                CheckPaddles();
             }
         }
 
         private void switchMove()
         {
-            // X
             switch (direction.X)
             {
                 case BallDirection.DirectionX.Left:
@@ -82,6 +82,31 @@ namespace pong
             if(Pos.Y > CONFIG.HEIGHT-20)
             {
                 direction.Y = BallDirection.DirectionY.Up;
+            }
+        }
+        private void CheckPaddles()
+        {
+            if(Pos.X < 25)
+            {
+                if (MovingHelper.p1.Contains(Pos))
+                {
+                    direction.X = BallDirection.DirectionX.Right;
+                }
+            }
+            else
+            {
+                //p1 lose
+            }
+            if (Pos.X > CONFIG.WIDTH-45)
+            {
+                if (MovingHelper.p2.Contains(Pos))
+                {
+                    direction.X = BallDirection.DirectionX.Left;
+                }
+            }
+            else
+            {
+                //p1 lose
             }
         }
     }

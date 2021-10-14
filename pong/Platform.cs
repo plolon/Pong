@@ -26,7 +26,10 @@ namespace pong
             }
             CheckBorders();
         }
-
+        public Rectangle GetRect()
+        {
+            return new Rectangle((int)Pos.X, (int)Pos.Y, 20, CONFIG.PLATFORM_SIZE);
+        }
         private void CheckBorders()
         {
             if (Pos.Y < 0)

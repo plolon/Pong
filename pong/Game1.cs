@@ -48,6 +48,8 @@ namespace pong
             MovingHelper.Move();
 
             players[0].Move(MovingHelper.player1);
+            MovingHelper.p1 = players[0].GetRect();
+            MovingHelper.p2 = players[1].GetRect();
             players[1].Move(MovingHelper.player2);
             ball.Move();
 

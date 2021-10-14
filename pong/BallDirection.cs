@@ -17,8 +17,7 @@ namespace pong
             Random random = new Random();
             Y = (DirectionY)random.Next(0, 2);
             X = (DirectionX)random.Next(0, 2);
-            //_Angle = (Angle)random.Next(0, 3);
-            _Angle = Angle._60;
+            _Angle = (Angle)random.Next(0, 3);
         }
         public enum DirectionY
         {

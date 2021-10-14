@@ -1,4 +1,6 @@
-﻿using Microsoft.Xna.Framework.Input;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
+using System.Collections.Generic;
 
 namespace pong
 {
@@ -6,6 +8,9 @@ namespace pong
     {
         public static Direction player1 { get; private set; }
         public static Direction player2 { get; private set; }
+
+        public static List<Rectangle> p1 { get; set; }
+        public static List<Rectangle> p2 { get; set; }
 
         public static void Move()
         {

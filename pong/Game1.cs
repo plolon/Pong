@@ -48,7 +48,10 @@ namespace pong
             MovingHelper.Move();
 
             players[0].Move(MovingHelper.player1);
+            MovingHelper.p1 = players[0].GetRect();
+            MovingHelper.p2 = players[1].GetRect();
             players[1].Move(MovingHelper.player2);
+            ball.Move();
 
             base.Update(gameTime);
         }
@@ -61,7 +64,7 @@ namespace pong
             // TODO: Add your drawing code here
             foreach (var player in players)
             {
-                _spriteBatch.Draw(WhiteTex, new Rectangle((int)player.Pos.X, (int)player.Pos.Y, 20, 100), Color.White);
+                _spriteBatch.Draw(WhiteTex, new Rectangle((int)player.Pos.X, (int)player.Pos.Y, 20, CONFIG.PLATFORM_SIZE), Color.White);
             }
             _spriteBatch.Draw(ballT, new Rectangle((int)ball.Pos.X - 15, (int)ball.Pos.Y - 15, 30, 30), Color.White);
             _spriteBatch.End();

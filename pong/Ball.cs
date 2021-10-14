@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
+using System.Collections.Generic;
 
 namespace pong
 {
@@ -75,41 +76,68 @@ namespace pong
 
         private void CheckWallCollision()
         {
-            if(Pos.Y < 0)
+            if (Pos.Y < 0)
             {
                 direction.Y = BallDirection.DirectionY.Down;
             }
-            if(Pos.Y > CONFIG.HEIGHT-20)
+            if (Pos.Y > CONFIG.HEIGHT - 20)
             {
                 direction.Y = BallDirection.DirectionY.Up;
             }
         }
         private void CheckPaddles()
         {
-            if(Pos.X < 25)
+            int? an = null;
+            if (Pos.X < 25)
             {
-                if (MovingHelper.p1.Contains(Pos))
+                 an = angle(MovingHelper.p1);
+                if (an.HasValue)
                 {
                     direction.X = BallDirection.DirectionX.Right;
                 }
+
             }
-            else
+            if(Pos.X > CONFIG.WIDTH - 45)
             {
-                //p1 lose
-            }
-            if (Pos.X > CONFIG.WIDTH-45)
-            {
-                if (MovingHelper.p2.Contains(Pos))
+                an = angle(MovingHelper.p2);
+                if (an.HasValue)
                 {
                     direction.X = BallDirection.DirectionX.Left;
                 }
             }
-            else
+            if (an.HasValue)
             {
-                //p1 lose
+                switch (an)
+                {
+                    case 0:
+                        direction._Angle = BallDirection.Angle._60;
+                        break;
+                    case 1:
+                        direction._Angle = BallDirection.Angle._45;
+                        break;
+                    case 2:
+                        direction._Angle = BallDirection.Angle._30;
+                        break;
+                    case 3:
+                        direction._Angle = BallDirection.Angle._45;
+                        break;
+                    case 4:
+                        direction._Angle = BallDirection.Angle._60;
+                        break;
+                }
             }
         }
+        private int? angle(List<Rectangle> col)
+        {
+            for (int i = 0; i < 5; i++)
+            {
+                if (col[i].Contains(Pos))
+                {
+                    return i;
+                }
+            }
+            return null;
+        }
     }
-
-
 }
+

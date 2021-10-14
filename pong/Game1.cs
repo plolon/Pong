@@ -49,6 +49,7 @@ namespace pong
 
             players[0].Move(MovingHelper.player1);
             players[1].Move(MovingHelper.player2);
+            ball.Move();
 
             base.Update(gameTime);
         }

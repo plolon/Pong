@@ -25,10 +25,8 @@ namespace pong
         {
             if (InMotion)
             {
-                //move
                 switchMove();
-                //check collision
-                //bound
+                CheckWallCollision();
             }
         }
 
@@ -73,6 +71,18 @@ namespace pong
                     break;
             }
             return tangent * CurrentA;
+        }
+
+        private void CheckWallCollision()
+        {
+            if(Pos.Y < 0)
+            {
+                direction.Y = BallDirection.DirectionY.Down;
+            }
+            if(Pos.Y > CONFIG.HEIGHT-20)
+            {
+                direction.Y = BallDirection.DirectionY.Up;
+            }
         }
     }
 

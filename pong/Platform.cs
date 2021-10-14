@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using System.Collections.Generic;
 
 namespace pong
 {
@@ -13,22 +14,29 @@ namespace pong
         }
         public void Move(Direction direction)
         {
-            switch(direction)
+            switch (direction)
             {
                 case Direction.Up:
-                    Pos = new Vector2(Pos.X, Pos.Y-1);
+                    Pos = new Vector2(Pos.X, Pos.Y - 2);
                     break;
                 case Direction.Down:
-                    Pos = new Vector2(Pos.X, Pos.Y + 1);
+                    Pos = new Vector2(Pos.X, Pos.Y + 2);
                     break;
                 case Direction.Immobile:
                     break;
             }
             CheckBorders();
         }
-        public Rectangle GetRect()
+        public List<Rectangle> GetRect()
         {
-            return new Rectangle((int)Pos.X, (int)Pos.Y, 20, CONFIG.PLATFORM_SIZE);
+            return new List<Rectangle>()
+            {
+                new Rectangle((int)Pos.X, (int)Pos.Y, 20, 25),
+                new Rectangle((int)Pos.X, (int)Pos.Y+25, 20, 25),
+                new Rectangle((int)Pos.X, (int)Pos.Y+50, 20, 50),
+                new Rectangle((int)Pos.X, (int)Pos.Y+100, 20, 25),
+                new Rectangle((int)Pos.X, (int)Pos.Y+125, 20, 25),
+            };
         }
         private void CheckBorders()
         {
@@ -36,7 +44,7 @@ namespace pong
             {
                 Pos = new Vector2(Pos.X, 0);
             }
-            if (Pos.Y > CONFIG.HEIGHT-CONFIG.PLATFORM_SIZE)
+            if (Pos.Y > CONFIG.HEIGHT - CONFIG.PLATFORM_SIZE)
             {
                 Pos = new Vector2(Pos.X, CONFIG.HEIGHT - CONFIG.PLATFORM_SIZE);
             }

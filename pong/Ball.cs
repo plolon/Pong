@@ -90,14 +90,14 @@ namespace pong
             int? an = null;
             if (Pos.X < 25)
             {
-                 an = angle(MovingHelper.p1);
+                an = angle(MovingHelper.p1);
                 if (an.HasValue)
                 {
                     direction.X = BallDirection.DirectionX.Right;
                 }
 
             }
-            if(Pos.X > CONFIG.WIDTH - 45)
+            if (Pos.X > CONFIG.WIDTH - 45)
             {
                 an = angle(MovingHelper.p2);
                 if (an.HasValue)
@@ -111,18 +111,24 @@ namespace pong
                 {
                     case 0:
                         direction._Angle = BallDirection.Angle._60;
+                        if (CurrentA > 1)
+                            CurrentA--;
                         break;
                     case 1:
                         direction._Angle = BallDirection.Angle._45;
                         break;
                     case 2:
                         direction._Angle = BallDirection.Angle._30;
+                        CurrentA++;
                         break;
                     case 3:
                         direction._Angle = BallDirection.Angle._45;
+                        CurrentA++;
                         break;
                     case 4:
                         direction._Angle = BallDirection.Angle._60;
+                        if (CurrentA > 1)
+                            CurrentA--;
                         break;
                 }
             }

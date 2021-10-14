@@ -17,10 +17,10 @@ namespace pong
             switch (direction)
             {
                 case Direction.Up:
-                    Pos = new Vector2(Pos.X, Pos.Y - 2);
+                    Pos = new Vector2(Pos.X, Pos.Y - 3);
                     break;
                 case Direction.Down:
-                    Pos = new Vector2(Pos.X, Pos.Y + 2);
+                    Pos = new Vector2(Pos.X, Pos.Y + 3);
                     break;
                 case Direction.Immobile:
                     break;

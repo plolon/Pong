@@ -17,6 +17,8 @@ namespace pong
         private Vector2 startingPos;
         public Ball(Vector2 startingPos)
         {
+            Counter.Tick = 3;
+            Counter.isCountering = true;
             CurrentA = 2;
             this.startingPos = startingPos;
             Pos = startingPos;
@@ -28,10 +30,13 @@ namespace pong
         {
             if (InMotion)
             {
-                switchMove();
-                CheckWallCollision();
-                CheckPaddles();
-                CheckLives();
+                if (!Counter.isCountering)
+                {
+                    switchMove();
+                    CheckWallCollision();
+                    CheckPaddles();
+                    CheckLives();
+                }
             }
         }
 

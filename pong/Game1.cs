@@ -13,7 +13,8 @@ namespace pong
         private Ball ball;
         private Texture2D WhiteTex;
         private Texture2D ballT;
-        private SpriteFont font;
+        private SpriteFont Lives_font;
+        private SpriteFont Counter_font;
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -36,14 +37,15 @@ namespace pong
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             WhiteTex = new Texture2D(GraphicsDevice, 1, 1);
             WhiteTex.SetData(new Color[] { Color.White });
-            font = Content.Load<SpriteFont>("font");
+            Lives_font = Content.Load<SpriteFont>("font");
+            Counter_font = Content.Load<SpriteFont>("font2");
         }
 
         protected override void Update(GameTime gameTime)
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-
+            Counter.StopWatch();
             KeyboardHandler.GetState();
             MovingHelper.Move();
 
@@ -60,7 +62,11 @@ namespace pong
         {
             GraphicsDevice.Clear(Color.Black);
             _spriteBatch.Begin();
-            DrawLine();
+            if (Counter.isCountering)
+            {
+                _spriteBatch.DrawString(Counter_font, $"{Counter.Tick}", new Vector2(CONFIG.WIDTH / 2 - 40, CONFIG.HEIGHT / 2 - 40), Color.White);
+            }
+            //DrawLine();
             DrawLives();
             foreach (var player in players)
             {
@@ -85,8 +91,8 @@ namespace pong
         }
         private void DrawLives()
         {
-            _spriteBatch.DrawString(font, $"Lives: {MovingHelper.Player1L}", new Vector2(10, 10), Color.White);
-            _spriteBatch.DrawString(font, $"Lives: {MovingHelper.Player2L}", new Vector2(CONFIG.WIDTH-100, 10), Color.White);
+            _spriteBatch.DrawString(Lives_font, $"Lives: {MovingHelper.Player1L}", new Vector2(10, 10), Color.White);
+            _spriteBatch.DrawString(Lives_font, $"Lives: {MovingHelper.Player2L}", new Vector2(CONFIG.WIDTH-100, 10), Color.White);
         }
     }
 }

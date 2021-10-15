@@ -2,12 +2,19 @@
 {
     public static class Counter
     {
-        private static int tick=1;
+        private static int tick;
 
         public static int Tick { get; set; }
         public static bool isCountering { get; set; }
-        private static bool reduce = false;
+        private static bool reduce;
 
+        public static void StartCounter()
+        {
+            Tick = 3;
+            isCountering = true;
+            tick = 0;
+            reduce = false;
+        }
         public static void StopWatch()
         {
             checkTick();

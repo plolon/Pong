@@ -17,8 +17,7 @@ namespace pong
         private Vector2 startingPos;
         public Ball(Vector2 startingPos)
         {
-            Counter.Tick = 3;
-            Counter.isCountering = true;
+            Counter.StartCounter();
             CurrentA = 2;
             this.startingPos = startingPos;
             Pos = startingPos;
@@ -146,11 +145,13 @@ namespace pong
             {
                 MovingHelper.Player1L--;
                 SetStartingPos();
+                Counter.StartCounter();
             }
             if (Pos.X > CONFIG.WIDTH - 10)
             {
                 MovingHelper.Player2L--;
                 SetStartingPos();
+                Counter.StartCounter();
             }
         }
 
@@ -158,6 +159,7 @@ namespace pong
         {
             direction = new BallDirection();
             Pos = startingPos;
+            CurrentA = 2;
         }
 
         private int? angle(List<Rectangle> col)

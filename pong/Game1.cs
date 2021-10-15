@@ -13,6 +13,8 @@ namespace pong
         private Ball ball;
         private Texture2D WhiteTex;
         private Texture2D ballT;
+        private SpriteFont Lives_font;
+        private SpriteFont Counter_font;
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -24,11 +26,12 @@ namespace pong
 
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
             players = CreatePaddles();
             ballT = Content.Load<Texture2D>("ball");
             ball = new Ball(new Vector2(_graphics.PreferredBackBufferWidth / 2, _graphics.PreferredBackBufferHeight / 2));
             base.Initialize();
+            MovingHelper.Player1L = 3;
+            MovingHelper.Player2L = 3;
         }
 
         protected override void LoadContent()
@@ -36,14 +39,15 @@ namespace pong
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             WhiteTex = new Texture2D(GraphicsDevice, 1, 1);
             WhiteTex.SetData(new Color[] { Color.White });
-            // TODO: use this.Content to load your game content here
+            Lives_font = Content.Load<SpriteFont>("font");
+            Counter_font = Content.Load<SpriteFont>("font2");
         }
 
         protected override void Update(GameTime gameTime)
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-
+            Counter.StopWatch();
             KeyboardHandler.GetState();
             MovingHelper.Move();
 
@@ -60,8 +64,12 @@ namespace pong
         {
             GraphicsDevice.Clear(Color.Black);
             _spriteBatch.Begin();
-            DrawLine();
-            // TODO: Add your drawing code here
+            if (Counter.isCountering)
+            {
+                _spriteBatch.DrawString(Counter_font, $"{Counter.Tick}", new Vector2(CONFIG.WIDTH / 2 - 40, CONFIG.HEIGHT / 2 - 40), Color.White);
+            }
+            //DrawLine();
+            DrawLives();
             foreach (var player in players)
             {
                 _spriteBatch.Draw(WhiteTex, new Rectangle((int)player.Pos.X, (int)player.Pos.Y, 20, CONFIG.PLATFORM_SIZE), Color.White);
@@ -82,6 +90,11 @@ namespace pong
         private void DrawLine()
         {
             _spriteBatch.Draw(WhiteTex, new Rectangle(CONFIG.WIDTH / 2 - 4, 0, 8, CONFIG.HEIGHT), Color.White);
+        }
+        private void DrawLives()
+        {
+            _spriteBatch.DrawString(Lives_font, $"Lives: {MovingHelper.Player1L}", new Vector2(10, 10), Color.White);
+            _spriteBatch.DrawString(Lives_font, $"Lives: {MovingHelper.Player2L}", new Vector2(CONFIG.WIDTH-100, 10), Color.White);
         }
     }
 }

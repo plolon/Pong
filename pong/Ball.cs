@@ -14,21 +14,28 @@ namespace pong
         public bool InMotion { get; private set; }
 
         public Vector2 Pos { get; set; }
+        private Vector2 startingPos;
         public Ball(Vector2 startingPos)
         {
+            Counter.StartCounter();
             CurrentA = 2;
+            this.startingPos = startingPos;
             Pos = startingPos;
             direction = new BallDirection();
             InMotion = true;
         }
-
+        
         public void Move()
         {
             if (InMotion)
             {
-                switchMove();
-                CheckWallCollision();
-                CheckPaddles();
+                if (!Counter.isCountering)
+                {
+                    switchMove();
+                    CheckWallCollision();
+                    CheckPaddles();
+                    CheckLives();
+                }
             }
         }
 
@@ -95,7 +102,6 @@ namespace pong
                 {
                     direction.X = BallDirection.DirectionX.Right;
                 }
-
             }
             if (Pos.X > CONFIG.WIDTH - 45)
             {
@@ -133,6 +139,29 @@ namespace pong
                 }
             }
         }
+        private void CheckLives()
+        {
+            if (Pos.X < 10)
+            {
+                MovingHelper.Player1L--;
+                SetStartingPos();
+                Counter.StartCounter();
+            }
+            if (Pos.X > CONFIG.WIDTH - 10)
+            {
+                MovingHelper.Player2L--;
+                SetStartingPos();
+                Counter.StartCounter();
+            }
+        }
+
+        private void SetStartingPos()
+        {
+            direction = new BallDirection();
+            Pos = startingPos;
+            CurrentA = 2;
+        }
+
         private int? angle(List<Rectangle> col)
         {
             for (int i = 0; i < 5; i++)

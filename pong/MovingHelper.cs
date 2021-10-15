@@ -12,6 +12,9 @@ namespace pong
         public static List<Rectangle> p1 { get; set; }
         public static List<Rectangle> p2 { get; set; }
 
+        public static int Player1L { get; set; }
+        public static int Player2L { get; set; }
+
         public static void Move()
         {
             if (KeyboardHandler.IsPressed(Keys.Up))

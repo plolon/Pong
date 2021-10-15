@@ -29,6 +29,7 @@ namespace pong
                 switchMove();
                 CheckWallCollision();
                 CheckPaddles();
+                CheckLives();
             }
         }
 
@@ -95,7 +96,6 @@ namespace pong
                 {
                     direction.X = BallDirection.DirectionX.Right;
                 }
-
             }
             if (Pos.X > CONFIG.WIDTH - 45)
             {
@@ -133,6 +133,18 @@ namespace pong
                 }
             }
         }
+        private void CheckLives()
+        {
+            if (Pos.X < 10)
+            {
+                MovingHelper.Player1L--;
+            }
+            if (Pos.X > CONFIG.WIDTH - 10)
+            {
+                MovingHelper.Player2L--;
+            }
+        }
+
         private int? angle(List<Rectangle> col)
         {
             for (int i = 0; i < 5; i++)

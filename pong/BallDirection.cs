@@ -35,6 +35,5 @@ namespace pong
             _45,
             _60,
         }
-
     }
 }

@@ -30,6 +30,8 @@ namespace pong
             ballT = Content.Load<Texture2D>("ball");
             ball = new Ball(new Vector2(_graphics.PreferredBackBufferWidth / 2, _graphics.PreferredBackBufferHeight / 2));
             base.Initialize();
+            MovingHelper.Player1L = 3;
+            MovingHelper.Player2L = 3;
         }
 
         protected override void LoadContent()

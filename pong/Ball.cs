@@ -14,14 +14,16 @@ namespace pong
         public bool InMotion { get; private set; }
 
         public Vector2 Pos { get; set; }
+        private Vector2 startingPos;
         public Ball(Vector2 startingPos)
         {
             CurrentA = 2;
+            this.startingPos = startingPos;
             Pos = startingPos;
             direction = new BallDirection();
             InMotion = true;
         }
-
+        
         public void Move()
         {
             if (InMotion)
@@ -138,11 +140,19 @@ namespace pong
             if (Pos.X < 10)
             {
                 MovingHelper.Player1L--;
+                SetStartingPos();
             }
             if (Pos.X > CONFIG.WIDTH - 10)
             {
                 MovingHelper.Player2L--;
+                SetStartingPos();
             }
+        }
+
+        private void SetStartingPos()
+        {
+            direction = new BallDirection();
+            Pos = startingPos;
         }
 
         private int? angle(List<Rectangle> col)
